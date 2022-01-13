@@ -15,6 +15,15 @@ const rows = [];
           let row = rows[i];
           QRCode.toString(row.URL, {type:'terminal'}, function (err, url) {
             console.log(`converted text ${i+1} (${row.URL}) into qr code: \n${url}`)
+          });
+          QRCode.toFile(path.resolve(`${__dirname}/../output/qr_${i+1}_${row.URL}.png`), row.URL, {
+            color: {
+              dark: '#000000', // Blue modules
+              light: '#0000' // Transparent background
+            }
+          }, function (err) {
+            if (err) throw err
+            console.log(`saved qr code: ${__dirname}/../output/qr_${i+1}_${row.URL}.png`)
           })
         }
         res("qr codes generated");
