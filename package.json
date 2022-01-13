@@ -1,0 +1,24 @@
+{
+  "name": "sep-qr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/geoimpactteam/sep-qr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/geoimpactteam/sep-qr/issues"
+  },
+  "homepage": "https://bitbucket.org/geoimpactteam/sep-qr#readme",
+  "dependencies": {
+    "csv-parser": "^3.0.0",
+    "qrcode": "^1.5.0"
+  }
+}
