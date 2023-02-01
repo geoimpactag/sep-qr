@@ -19,12 +19,12 @@ function main(){
                             console.log(`converted text ${i+1} (${row.URL}) into qr code: \n${url}`)
                         });
                         const myURL = new URL(row.URL);
-                        const filePath = myURL.href
+                        const fileName = myURL.href
                             .replaceAll("/", "_")
                             .replaceAll(":", "_")
                             .replaceAll("?", "_")
                             .replaceAll("&", "_");
-                        QRCode.toFile(path.resolve(`${__dirname}/../output/qr_${i+1}_${filePath}.png`), row.URL, {
+                        QRCode.toFile(path.resolve(`${__dirname}/../output/qr_${i+1}_${fileName}.png`), row.URL, {
                             color: {
                                 dark: '#000000', // Blue modules
                                 light: '#0000' // Transparent background
@@ -32,7 +32,7 @@ function main(){
                             width: 512, height: 512
                         }, function (err) {
                             if (err) throw err
-                            console.log(`saved qr code: ${__dirname}/../output/qr_${i+1}_${row.URL}.png`)
+                            console.log(`saved qr code: ${__dirname}/../output/qr_${i+1}_${fileName}.png`)
                         })
                     }
                     res("qr codes generated");
@@ -51,12 +51,12 @@ async function generateQR(rows){
             console.log(`converted text ${i+1} (${row.URL}) into qr code: \n${url}`)
         });
         const myURL = new URL(row.URL);
-        const filePath = myURL.href
+        const fileName = myURL.href
             .replaceAll("/", "_")
             .replaceAll(":", "_")
             .replaceAll("?", "_")
             .replaceAll("&", "_");
-        let fullFilePath = `${__dirname}/../output/qr_${i+1}_${filePath}.png`;
+        let fullFilePath = `${__dirname}/../output/qr_${i+1}_${fileName}.png`;
         fileNames.push(fullFilePath)
         await new Promise((res, rej) => {
             QRCode.toFile(path.resolve(fullFilePath), row.URL, {
@@ -69,7 +69,7 @@ async function generateQR(rows){
                 if (err){
                     rej(err.message)
                 }
-                console.log(`saved qr code: ${__dirname}/../output/qr_${i+1}_${row.URL}.png`);
+                console.log(`saved qr code: ${__dirname}/../output/qr_${i+1}_${fileName}.png`);
                 res();
             })
         })
