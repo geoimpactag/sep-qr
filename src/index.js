@@ -41,8 +41,9 @@ function main(){
     })()
 }
 
-function generateQR(rows){
+async function generateQR(rows){
     console.log("genererate csv from rows:\n", rows);
+    let fileNames = [];
     rows = rows.filter(row => row !== {} && row?.URL !== undefined);
     for(let i = 0; i < rows.length; i++){
         let row = rows[i];
@@ -55,18 +56,25 @@ function generateQR(rows){
             .replaceAll(":", "_")
             .replaceAll("?", "_")
             .replaceAll("&", "_");
-        QRCode.toFile(path.resolve(`${__dirname}/../output/qr_${i+1}_${filePath}.png`), row.URL, {
-            color: {
-                dark: '#000000', // Blue modules
-                light: '#0000' // Transparent background
-            },
-            width: 512, height: 512
-        }, function (err) {
-            if (err) throw err
-            console.log(`saved qr code: ${__dirname}/../output/qr_${i+1}_${row.URL}.png`)
+        let fullFilePath = `${__dirname}/../output/qr_${i+1}_${filePath}.png`;
+        fileNames.push(fullFilePath)
+        await new Promise((res, rej) => {
+            QRCode.toFile(path.resolve(fullFilePath), row.URL, {
+                color: {
+                    dark: '#000000', // Blue modules
+                    light: '#0000' // Transparent background
+                },
+                width: 512, height: 512
+            }, function (err) {
+                if (err){
+                    rej(err.message)
+                }
+                console.log(`saved qr code: ${__dirname}/../output/qr_${i+1}_${row.URL}.png`);
+                res();
+            })
         })
     }
-    return true;
+    return fileNames;
 }
 
 module.exports = { generateQR, main }
