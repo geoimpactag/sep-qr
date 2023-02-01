@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start-server": "cross-env PORT=3001 node ./server/index.js",
-    "start": "npm run clean && node ./src/index.js",
+    "start": "npm run clean && node ./src/standalone.js",
     "clean": "shx rm -rf ./output/*",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
