@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script>
+    function send(){
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            "rows": [
+                {
+                    "URL": "https://energieportal.energyapps.ch/ep/belp?lng=de-CH"
+                }
+            ]
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:3001", requestOptions)
+            .then(response => {
+                return response.blob()
+            })
+            .then(result => {
+                const a = document.createElement("a");
+                a.href = window.URL.createObjectURL(result);
+                a.download = "qrcode";
+                a.click();
+                console.log(result);
+            })
+            .catch(error => console.log('error', error));
+    }
+  </script>
+</head>
+<body>
+<button onclick="send()">send</button>
+</body>
+</html>

@@ -9,7 +9,7 @@ const path = require("path");
 
 app.get('/', (req, res) => {
     console.log("GET", req);
-    res.send('Hello World!');
+    res.sendFile(path.resolve(__dirname+"/index.html"));
 });
 app.post('/', async function (req, res, next) {
     console.log('POST', req.body)
