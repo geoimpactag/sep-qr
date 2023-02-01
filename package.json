@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start-server": "cross-env PORT=3001 node ./server/index.js",
     "start": "npm run clean && node ./src/index.js",
     "clean": "shx rm -rf ./output/*",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,9 +21,12 @@
   "homepage": "https://bitbucket.org/geoimpactteam/sep-qr#readme",
   "dependencies": {
     "csv-parser": "^3.0.0",
-    "qrcode": "^1.5.0"
+    "express": "^4.18.2",
+    "qrcode": "^1.5.0",
+    "shelljs": "^0.8.5"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "rimraf": "^4.1.2",
     "shx": "^0.3.4"
   }
